@@ -9,6 +9,7 @@ function startGame() {
     resetGame()
     updateStatus("Busca los pares de colores.", "interface alert alert-warning")
     arrayColors = showColors(mixColors())
+    handleUserClick()
 }
 
 function resetGame() {
@@ -70,3 +71,68 @@ function showColors(colors) {
     return colors
 }
 
+function handleUserClick() {
+    let clicks = 0
+    arrayColors.forEach(function (color) {
+        color.onclick = function () {
+                clicks++
+                if (color.style.background !== "black") {
+                    if (clicks === 2) {
+                        round++
+                        document.querySelector("#round").innerText = `Ronda Nº${round}`
+                        if (color.id === "light-blue") {
+                            color.style.background = "lightblue"
+                        } else if (color.id === "dark-green") {
+                            color.style.background = "darkgreen"
+                        } else if (color.id === "gold") {
+                            color.style.background === "rgba(255, 217, 0, 0.788)"
+                        } else if (color.id === "rebecca-purple") {
+                            color.style.background = "rebeccapurple"
+                        } else {
+                            color.style.background = color.id
+                        }
+                        color.classList = "color-2"
+                        if (document.querySelector(".color-1") === document.querySelector(".color-2")) {
+                            clicks = 1
+                            return
+                        } else if (document.querySelector(".color-1").id === document.querySelector(".color-2").id) {
+                            setTimeout(function () {
+                                document.querySelector(".color-1").style.background = "black"
+                                document.querySelector(".color-2").style.background = "black"
+                                document.querySelector(".color-1").className = "color col-sm-3"
+                                document.querySelector(".color-2").className = "color col-sm-3"
+                                clicks = 0
+                            }, 250)
+                        } else {
+                            setTimeout(function () {
+                                document.querySelector(".color-1").style.background = "white"
+                                document.querySelector(".color-2").style.background = "white"
+                                document.querySelector(".color-1").className = "color col-sm-3"
+                                document.querySelector(".color-2").className = "color col-sm-3"
+                                clicks = 0
+                            }, 1000)
+                        }
+                        return
+                    } else if (clicks > 2) {
+                        return
+                    } else {
+                        if (color.id === "light-blue") {
+                            color.style.background = "lightblue"
+                        } else if (color.id === "dark-green") {
+                            color.style.background = "darkgreen"
+                        } else if (color.id === "rebecca-purple") {
+                            color.style.background = "rebeccapurple"
+                        } else {
+                            color.style.background = color.id
+                        }
+                    }
+                } else {
+                    if (clicks === 2) {
+                        clicks = 1
+                    } else if (clicks === 1) {
+                        clicks = 0
+                    }
+                }
+        }
+    })
+}
