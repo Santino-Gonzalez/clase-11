@@ -73,8 +73,11 @@ function showColors(colors) {
 
 function handleUserClick() {
     let clicks = 0
+    let foundPairs = 0
+    let letter = 0
     arrayColors.forEach(function (color) {
         color.onclick = function () {
+            if (color.className !== "color-1") {
                 clicks++
                 if (color.style.background !== "black") {
                     if (clicks === 2) {
@@ -103,6 +106,36 @@ function handleUserClick() {
                                 document.querySelector(".color-2").className = "color col-sm-3"
                                 clicks = 0
                             }, 250)
+                            foundPairs++
+                            arrayColors.forEach(function () {
+                                if (letter === 0) {
+                                    if (foundPairs === arrayColors.length / 2) {
+                                        const $alertCongratulations = document.createElement("div")
+                                        $alertCongratulations.className = "alert alert-warning alert-dismissible fade show"
+                                        $alertCongratulations.setAttribute("role", "alert")
+                                        const $textCongratulations = document.createElement("strong")
+                                        $textCongratulations.innerText = "Felicidades! Has encontrado todos los pares!"
+                                        const $buttonClose = document.createElement("button")
+                                        $buttonClose.type = "button"
+                                        $buttonClose.className = "btn-close"
+                                        $buttonClose.setAttribute("data-bs-dismiss", "alert")
+                                        $buttonClose.setAttribute("aria-label", "Close")
+                                        $alertCongratulations.appendChild($textCongratulations)
+                                        $alertCongratulations.appendChild($buttonClose)
+                                        const $containerInterface = document.querySelector("#container-alert-win")
+                                        $containerInterface.appendChild($alertCongratulations)
+                                        $buttonClose.onclick = function () {
+                                            $containerInterface.removeChild($alertCongratulations)
+                                        }
+                                        letter++
+                                        setTimeout(function () {
+                                            if ($alertCongratulations.parentNode === $containerInterface) {
+                                                $containerInterface.removeChild($alertCongratulations)
+                                            }
+                                        }, 5000);
+                                    }
+                                }
+                            })
                         } else {
                             setTimeout(function () {
                                 document.querySelector(".color-1").style.background = "white"
@@ -125,6 +158,7 @@ function handleUserClick() {
                         } else {
                             color.style.background = color.id
                         }
+                        color.classList = "color-1"
                     }
                 } else {
                     if (clicks === 2) {
@@ -133,6 +167,7 @@ function handleUserClick() {
                         clicks = 0
                     }
                 }
+            }
         }
     })
 }
