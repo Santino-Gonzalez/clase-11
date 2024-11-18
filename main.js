@@ -14,7 +14,11 @@ document.querySelector("#empezar").onclick = function () {
 //RESETEAR JUEGO
 
 document.querySelector("#resetear").onclick = function () {
-
+    document.querySelector("#intentos").innerText = `Intentos: 0`;
+    colores.forEach(color => {
+        color.style.background = "white";
+    });
+    document.querySelector("#empezar").disabled = false;
 }
 
 //FUNCION MEZCLAR COLORES
