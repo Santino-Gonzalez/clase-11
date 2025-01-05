@@ -1,0 +1,24 @@
+{
+  "name": "clase-11",
+  "version": "1.0.0",
+  "description": "MemoTest",
+  "main": "index.htmll",
+  "scripts": {
+    "empezar": "http-server",
+    "cypress-dev": "cypress open",
+    "cypress-run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Santino-Gonzalez/clase-11.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Santino-Gonzalez/clase-11/issues"
+  },
+  "homepage": "https://github.com/Santino-Gonzalez/clase-11#readme",
+  "devDependencies": {
+    "cypress": "^13.15.2"
+  }
+}
